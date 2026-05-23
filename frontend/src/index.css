@@ -245,3 +245,203 @@ body {
     flex-direction: column;
   }
 }
+
+.wagon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+ 
+.wagon-card {
+  background: #fffaf5;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  padding: 20px 16px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+  transition: 0.2s;
+}
+ 
+.wagon-card:hover {
+  transform: translateY(-2px);
+  border-color: #a47148;
+}
+ 
+.wagon-card-active {
+  border-color: #6f4e37;
+  background: #f5ebe0;
+}
+ 
+.wagon-card strong {
+  color: #5c4033;
+  font-size: 16px;
+}
+ 
+.wagon-card span:last-child {
+  color: #8b7765;
+  font-size: 13px;
+}
+ 
+/* ─── SeatMap ────────────────────────────────────────── */
+.seat-map {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(64px, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+ 
+.seat {
+  border: 2px solid transparent;
+  border-radius: 14px;
+  padding: 10px 6px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  transition: 0.2s;
+}
+ 
+.seat:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+ 
+.seat-number {
+  font-weight: 700;
+  font-size: 16px;
+  color: #5c4033;
+}
+ 
+.seat-pos {
+  font-size: 11px;
+  color: #8b7765;
+}
+ 
+.seat-available {
+  background: #d4edda;
+  border-color: #a3d9a5;
+}
+ 
+.seat-selected {
+  background: #cce5ff;
+  border-color: #74b8f5;
+}
+ 
+.seat-booked {
+  background: #f8d7da;
+  border-color: #f5c2c7;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+ 
+/* ─── Seat legend ────────────────────────────────────── */
+.seat-legend {
+  display: flex;
+  gap: 18px;
+  margin-top: 12px;
+  font-size: 13px;
+  color: #5c4033;
+  flex-wrap: wrap;
+}
+ 
+.seat-legend span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+ 
+.legend-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  display: inline-block;
+}
+ 
+.legend-available { background: #d4edda; }
+.legend-selected   { background: #cce5ff; }
+.legend-booked     { background: #f8d7da; }
+ 
+/* ─── BookingForm ────────────────────────────────────── */
+.booking-form {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+ 
+.booking-chips {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+ 
+.info-chip {
+  background: #f5ebe0;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 13px;
+  color: #6f4e37;
+  font-weight: 600;
+}
+ 
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+ 
+.form-field span {
+  font-size: 13px;
+  color: #8b7765;
+  font-weight: 600;
+}
+ 
+.form-field input {
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 2px solid #e8ddd4;
+  background: #fffaf5;
+  font-size: 15px;
+  color: #5c4033;
+  outline: none;
+  transition: border-color 0.2s;
+}
+ 
+.form-field input:focus {
+  border-color: #a47148;
+}
+ 
+/* ─── Booking section blocks ─────────────────────────── */
+.booking-section {
+  margin-top: 30px;
+}
+ 
+.booking-section h3 {
+  color: #5c4033;
+  font-size: 20px;
+  margin-bottom: 4px;
+}
+ 
+/* ─── Messages ───────────────────────────────────────── */
+.error-msg {
+  margin-top: 10px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #f8d7da;
+  color: #842029;
+  font-size: 14px;
+}
+ 
+.success-msg {
+  margin-top: 10px;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #d4edda;
+  color: #155724;
+  font-size: 14px;
+}
+ 
