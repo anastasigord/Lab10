@@ -1,37 +1,33 @@
-const BASE_URL = "http://localhost:3000/api";
-
-export async function getTrainDetails(trainId, signal) {
-  const res = await fetch(`${BASE_URL}/trains/${trainId}`, { signal });
-  if (!res.ok) throw new Error("Не вдалося завантажити дані рейсу.");
-  return res.json();
+import path from "path";
+import crypto from "crypto";
+import { fileURLToPath } from "url";
+import { readJsonFile, writeJsonFile } from "../utils/jsonFileStore.js";
+ 
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const bookingsFile = path.join(__dirname, "..", "data", "bookings.json");
+ 
+async function readBookings() {
+  return readJsonFile(bookingsFile, []);
 }
-
-export async function getWagonSeats(trainId, wagonId, signal) {
-  const res = await fetch(
-    `${BASE_URL}/trains/${trainId}/wagons/${wagonId}/seats`,
-    { signal }
-  );
-  if (!res.ok) throw new Error("Не вдалося завантажити схему місць.");
-  return res.json();
+ 
+export async function getBookingsByTrainAndWagon(trainId, wagonId) {
+  const bookings = await readBookings();
+  return bookings.filter((b) => b.trainId === trainId && b.wagonId === wagonId);
 }
-
-async function parseJson(res) {
-  const raw = await res.text();
-  const clean = raw.replace(/^\uFEFF/, "");
-  try {
-    return clean ? JSON.parse(clean) : {};
-  } catch {
-    throw new Error("Сервер повернув некоректну відповідь.");
-  }
-}
-
+ 
 export async function createBooking(payload) {
-  const res = await fetch(`${BASE_URL}/bookings`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
-  const data = await parseJson(res);
-  if (!res.ok) throw new Error(data.message || "Не вдалося створити бронювання.");
-  return data;
+  const bookings = await readBookings();
+  const booking = {
+    id: crypto.randomUUID(),
+    trainId: payload.trainId,
+    wagonId: payload.wagonId,
+    seatIds: payload.seatIds,
+    name: payload.name,
+    phone: payload.phone,
+    email: payload.email,
+    createdAt: new Date().toISOString(),
+  };
+  bookings.push(booking);
+  await writeJsonFile(bookingsFile, bookings);
+  return booking;
 }
