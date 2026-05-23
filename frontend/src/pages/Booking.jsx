@@ -1,11 +1,19 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import WagonSelector from "../components/WagonSelector";
+import SeatMap from "../components/SeatMap";
+import BookingForm from "../components/BookingForm";
+import { getTrainDetails, getWagonSeats, createBooking } from "../services/BookingService";
+
 
 export default function Booking() {
   const { id } = useParams();
   const navigate = useNavigate();
 
   const [train, setTrain] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
+
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/trains`)
